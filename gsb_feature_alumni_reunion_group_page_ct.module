@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the GSB Feature Alumni Reunion Group Page Content Type feature.
+ */
+
+include_once 'gsb_feature_alumni_reunion_group_page_ct.features.inc';
