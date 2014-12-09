@@ -78,6 +78,132 @@ function gsb_feature_alumni_reunion_group_page_ct_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'panelizer_defaults_node_alumni_reunion_group_page';
+  $strongarm->value = array(
+    'status' => 1,
+    'view modes' => array(
+      'page_manager' => array(
+        'status' => 1,
+        'default' => 1,
+        'choice' => 1,
+      ),
+      'default' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'full' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'teaser' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'rss' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'ical' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'diff_standard' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'token' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'views_content_pane' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'event_listing' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'event_upcoming' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'featured' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'idea_story_latest_stories' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'idea_story_related' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'idea_story_top_stories' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'insight_featured_card' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'megamenu' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'news_listing' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'people_fpp' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'phd_job_market_candidate' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'media_contact' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'teaser_listing' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'revision' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+    ),
+  );
+  $export['panelizer_defaults_node_alumni_reunion_group_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_alumni_reunion_group_page_pattern';
   $strongarm->value = '/alumni/reunions/[node:title]';
   $export['pathauto_node_alumni_reunion_group_page_pattern'] = $strongarm;
