@@ -5,3 +5,63 @@
  */
 
 include_once 'gsb_feature_alumni_reunion_group_page_ct.features.inc';
+
+/**
+ * Implements hook_node_insert().
+ */
+function gsb_feature_alumni_reunion_group_page_ct_node_insert($node) {
+  _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function gsb_feature_alumni_reunion_group_page_ct_node_update($node) {
+  _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
+}
+
+/**
+ * Helper for hook_node_insert() and hook_node_update().
+ */
+function _gsb_feature_alumni_reunion_group_page_ct_node_save($node) {
+  // Include the pathauto library.
+  module_load_include('inc', 'pathauto');
+
+  // if this is not an alumni group, then...
+  if ($node->type != 'alumni_reunion_group_page') {
+    // ... this is not the node we are looking for
+    return;
+  }
+
+  // if there is no session id, then...
+  if (empty($node->field_reunion_session_ref['und'])) {
+    // ... there is nothing for us to do
+    return;
+  }
+
+  // Get the path alias of the group node.
+  $path = drupal_get_path_alias('node/' . $node->nid);
+
+  // Get the title of the session and clean it for urls.
+  $session_nid = $node->field_reunion_session_ref['und'][0]['target_id'];
+  $session_node = node_load($session_nid);
+  $path_part1 = $path . '/' . pathauto_cleanstring($session_node->title);
+
+  // DB Query to get list of nids for all agenda items with a matching session id.
+  $results = db_query(
+    "Select entity_id from {field_data_field_reunion_session_ref} where field_reunion_session_ref_target_id = " . $node->field_reunion_session_ref['und'][0]['target_id'] . " AND bundle = 'alumni_reunion_agenda_item'"
+  );
+  foreach ($results as $record) {
+    $item_node = node_load($record->entity_id);
+    $path = $path_part1 . '/' . pathauto_cleanstring($item_node->title);
+
+    $path_info = path_load(array('alias' => $path));
+    if (empty($path_info)) {
+      $edit = array(
+        'source'   => 'node/' . $item_node->nid,
+        'alias'    => $path,
+      );
+      path_save($edit);
+    }
+  }
+}
