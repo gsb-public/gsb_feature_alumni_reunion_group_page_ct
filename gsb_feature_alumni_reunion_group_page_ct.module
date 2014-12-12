@@ -40,12 +40,12 @@ function _gsb_feature_alumni_reunion_group_page_ct_node_save($node) {
   }
 
   // Get the path alias of the group node.
-  $path = drupal_get_path_alias('node/' . $node->nid);
+  $group_path = drupal_get_path_alias('node/' . $node->nid);
 
   // Get the title of the session and clean it for urls.
   $session_nid = $node->field_reunion_session_ref['und'][0]['target_id'];
   $session_node = node_load($session_nid);
-  $path_part1 = $path . '/' . pathauto_cleanstring($session_node->title);
+  $path_part1 = $group_path . '/' . pathauto_cleanstring($session_node->title);
 
   // DB Query to get list of nids for all agenda items with a matching session id.
   $results = db_query(
@@ -64,4 +64,20 @@ function _gsb_feature_alumni_reunion_group_page_ct_node_save($node) {
       path_save($edit);
     }
   }
+
+  // save a redirect to the group page
+  _gsb_feature_alumni_reunion_group_page_ct_add_redirect($path_part1, 'node/' . $node->nid);
 }
+
+function _gsb_feature_alumni_reunion_group_page_ct_add_redirect($source_url, $redirect_url) {
+  $redirect = array();
+  $redirect['source'] = $source_url;
+  $redirect['redirect'] = $redirect_url;
+  $redirect_object = new stdClass();
+  redirect_object_prepare($redirect_object, $redirect);
+  // Check if the redirect exists before saving.
+  if (!redirect_load_by_source($source_url)) {
+    redirect_save($redirect_object);
+  }
+  return $redirect_object;
+ }
