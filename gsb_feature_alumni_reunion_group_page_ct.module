@@ -49,7 +49,7 @@ function _gsb_feature_alumni_reunion_group_page_ct_node_save($node) {
 
   // DB Query to get list of nids for all agenda items with a matching session id.
   $results = db_query(
-    "Select entity_id from {field_data_field_reunion_session_ref} where field_reunion_session_ref_target_id = " . $node->field_reunion_session_ref['und'][0]['target_id'] . " AND bundle = 'alumni_reunion_agenda_item'"
+    "Select entity_id from {field_data_field_alumni_session_ref} where field_alumni_session_ref_target_id = " . $node->field_reunion_session_ref['und'][0]['target_id'] . " AND bundle = 'alumni_reunion_agenda_item'"
   );
   foreach ($results as $record) {
     $item_node = node_load($record->entity_id);
