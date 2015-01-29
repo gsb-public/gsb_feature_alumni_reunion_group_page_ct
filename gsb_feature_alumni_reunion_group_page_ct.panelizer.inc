@@ -74,6 +74,24 @@ function gsb_feature_alumni_reunion_group_page_ct_panelizer_defaults() {
     $pane->locks = array();
     $display->content['new-1'] = $pane;
     $display->panels['main'][0] = 'new-1';
+    $pane = new stdClass();
+    $pane->pid = 'new-2';
+    $pane->panel = 'main';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'gsb_alumni_agenda_list-panel_pane_1';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['main'][1] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
