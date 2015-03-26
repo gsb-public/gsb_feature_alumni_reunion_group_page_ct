@@ -269,7 +269,7 @@ function gsb_feature_alumni_reunion_group_page_ct_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_alumni_reunion_group_page_pattern';
-  $strongarm->value = '/alumni/reunions/[node:title]';
+  $strongarm->value = 'alumni/reunions/[node:title]';
   $export['pathauto_node_alumni_reunion_group_page_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
