@@ -9,14 +9,14 @@ include_once 'gsb_feature_alumni_reunion_group_page_ct.features.inc';
 /**
  * Implements hook_node_insert().
  */
-function gsb_feature_alumni_reunion_group_page_ct_node_insert($node) {
+function gsb_feature_alumni_reunion_group_page_ct_entity_insert($node) {
   _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
 }
 
 /**
  * Implements hook_node_update().
  */
-function gsb_feature_alumni_reunion_group_page_ct_node_update($node) {
+function gsb_feature_alumni_reunion_group_page_ct_entity_update($node) {
   _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
 }
 
@@ -34,7 +34,7 @@ function _gsb_feature_alumni_reunion_group_page_ct_node_save($node) {
   }
 
   // if there is no session id, then...
-  if (empty($node->field_reunion_session_ref['und'])) {
+  if (empty($node->field_reunion_session_ref[$node->language])) {
     // ... there is nothing for us to do
     return;
   }
@@ -42,27 +42,21 @@ function _gsb_feature_alumni_reunion_group_page_ct_node_save($node) {
   // Get the path alias of the group node.
   $group_path = drupal_get_path_alias('node/' . $node->nid);
 
-  // Get the title of the session and clean it for urls.
-  $session_nid = $node->field_reunion_session_ref['und'][0]['target_id'];
-  $session_node = node_load($session_nid);
-  $path_part1 = $group_path . '/' . pathauto_cleanstring($session_node->title);
+  // Get the session title and clean it for urls.
+  $session_nid = $node->field_reunion_session_ref[$node->language][0]['target_id'];
+  $session_path = path_load('node/' . $session_nid);
+  $session_path_array = explode('/', $session_path['alias']);
+  $path = array_pop($session_path_array);
+  $path_part1 = $group_path . '/' . $path;
 
   // DB Query to get list of nids for all agenda items with a matching session id.
   $results = db_query(
-    "Select entity_id from {field_data_field_alumni_session_ref} where field_alumni_session_ref_target_id = " . $node->field_reunion_session_ref['und'][0]['target_id'] . " AND bundle = 'alumni_reunion_agenda_item'"
+    "Select entity_id from {field_data_field_alumni_session_ref} where field_alumni_session_ref_target_id = " . $session_nid . " AND bundle = 'alumni_reunion_agenda_item'"
   );
   foreach ($results as $record) {
-    $item_node = node_load($record->entity_id);
-    $path = $path_part1 . '/' . pathauto_cleanstring($item_node->title);
-
-    $path_info = path_load(array('alias' => $path));
-    if (empty($path_info)) {
-      $edit = array(
-        'source'   => 'node/' . $item_node->nid,
-        'alias'    => $path,
-      );
-      path_save($edit);
-    }
+    $agenda_item_node = node_load($record->entity_id);
+    $alias_path = $path_part1 . '/' . pathauto_cleanstring($agenda_item_node->title);
+    gsb_feature_alumni_reunion_agenda_item_ct_create_alias($agenda_item_node, $alias_path);
   }
 
   // save a redirect to the group page
