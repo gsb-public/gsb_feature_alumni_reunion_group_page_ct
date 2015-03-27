@@ -9,15 +9,19 @@ include_once 'gsb_feature_alumni_reunion_group_page_ct.features.inc';
 /**
  * Implements hook_node_insert().
  */
-function gsb_feature_alumni_reunion_group_page_ct_entity_insert($node) {
-  _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
+function gsb_feature_alumni_reunion_group_page_ct_entity_insert($node, $type) {
+  if ($type == 'node') {
+    _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
+  }  
 }
 
 /**
  * Implements hook_node_update().
  */
-function gsb_feature_alumni_reunion_group_page_ct_entity_update($node) {
-  _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
+function gsb_feature_alumni_reunion_group_page_ct_entity_update($node, $type) {
+  if ($type == 'node') {
+    _gsb_feature_alumni_reunion_group_page_ct_node_save($node);
+  }
 }
 
 /**
