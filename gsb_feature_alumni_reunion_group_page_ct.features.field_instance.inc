@@ -10,7 +10,8 @@
 function gsb_feature_alumni_reunion_group_page_ct_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-alumni_reunion_group_page-field_alumni_program'
+  // Exported field_instance:
+  // 'node-alumni_reunion_group_page-field_alumni_program'.
   $field_instances['node-alumni_reunion_group_page-field_alumni_program'] = array(
     'bundle' => 'alumni_reunion_group_page',
     'custom_add_another' => '',
@@ -104,7 +105,7 @@ Half Century Club|Half Century Club',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-alumni_reunion_group_page-field_body'
+  // Exported field_instance: 'node-alumni_reunion_group_page-field_body'.
   $field_instances['node-alumni_reunion_group_page-field_body'] = array(
     'bundle' => 'alumni_reunion_group_page',
     'custom_add_another' => '',
@@ -198,7 +199,8 @@ Half Century Club|Half Century Club',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-alumni_reunion_group_page-field_editorial_summary'
+  // Exported field_instance:
+  // 'node-alumni_reunion_group_page-field_editorial_summary'.
   $field_instances['node-alumni_reunion_group_page-field_editorial_summary'] = array(
     'bundle' => 'alumni_reunion_group_page',
     'custom_add_another' => '',
@@ -289,7 +291,8 @@ Half Century Club|Half Century Club',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-alumni_reunion_group_page-field_reunion_session_ref'
+  // Exported field_instance:
+  // 'node-alumni_reunion_group_page-field_reunion_session_ref'.
   $field_instances['node-alumni_reunion_group_page-field_reunion_session_ref'] = array(
     'bundle' => 'alumni_reunion_group_page',
     'custom_add_another' => '',
@@ -337,7 +340,7 @@ Half Century Club|Half Century Club',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-alumni_reunion_group_page-field_year'
+  // Exported field_instance: 'node-alumni_reunion_group_page-field_year'.
   $field_instances['node-alumni_reunion_group_page-field_year'] = array(
     'bundle' => 'alumni_reunion_group_page',
     'custom_add_another' => '',
